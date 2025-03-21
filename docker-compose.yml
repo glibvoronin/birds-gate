@@ -1,0 +1,13 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: birds-gate-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: birds_gate_db
+    volumes:
+      - ~/birds-gate-pgsql:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
