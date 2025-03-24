@@ -12,4 +12,12 @@ export class UsersRepository {
   findOneByUsername(username: string): Promise<User | null> {
     return this.userRepository.findOne({ where: { username } });
   }
+
+  findAll(): Promise<User[]> {
+    return this.userRepository.find();
+  }
+
+  create(user: Partial<User>): Promise<User> {
+    return this.userRepository.save(this.userRepository.create(user));
+  }
 }
