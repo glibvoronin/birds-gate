@@ -26,7 +26,8 @@
       ],
       "@birds-gate/util-interfaces": [
         "libs/shared/util-interfaces/src/index.ts"
-      ]
+      ],
+      "@birds-gate/util-roles": ["libs/birds-gate-api/util-roles/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

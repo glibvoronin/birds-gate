@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { User, UsersRepository } from '@birds-gate/data-access';
-import { UserResponseDto } from '@birds-gate/util-interfaces';
+import {
+  CreateUserDto,
+  UserResponseDto,
+  UserRoleEnum,
+} from '@birds-gate/util-interfaces';
 import { UserMapper } from '../mappers/user.mapper';
-
-import { CreateUserDto } from '@birds-gate/util-interfaces';
 
 @Injectable()
 export class UsersService {
@@ -17,9 +19,12 @@ export class UsersService {
     return user;
   }
 
-  async findAll(): Promise<UserResponseDto[]> {
+  async getAllUsers(authRole: UserRoleEnum): Promise<UserResponseDto[]> {
     const users = await this.userRepository.findAll();
-    return UserMapper.toResponseDtoList(users);
+    if (authRole === UserRoleEnum.ADMIN) {
+      return UserMapper.toResponseDtoList(users);
+    }
+    return UserMapper.toShortResponseDtoList(users);
   }
 
   async createUser(dto: CreateUserDto): Promise<UserResponseDto> {

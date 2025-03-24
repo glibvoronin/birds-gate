@@ -1,0 +1,9 @@
+{
+  "name": "util-roles",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/birds-gate-api/util-roles/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project util-roles --web",
+  "targets": {}
+}

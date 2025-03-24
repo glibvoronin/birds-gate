@@ -10,8 +10,19 @@ export class UserMapper {
     };
   }
 
+  static toShortResponseDto(user: User): UserResponseDto {
+    const { password, createdAt, updatedAt, ...safeUser } = user;
+    return {
+      ...safeUser,
+    };
+  }
+
   static toResponseDtoList(users: User[]): UserResponseDto[] {
     return users.map(UserMapper.toResponseDto);
+  }
+
+  static toShortResponseDtoList(users: User[]): UserResponseDto[] {
+    return users.map(UserMapper.toShortResponseDto);
   }
 
   static async fromCreateDto(dto: CreateUserDto): Promise<User> {
