@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Post, Req } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, Req } from '@nestjs/common';
 import {
   AuthenticatedJwtRequest,
+  UpdateUserDto,
   UserRoleEnum,
 } from '@birds-gate/util-interfaces';
 import { UsersService } from '../services/users.service';
@@ -20,5 +21,11 @@ export class UsersController {
   @Post('')
   createUser(@Body() dto: CreateUserDto) {
     return this.usersService.createUser(dto);
+  }
+
+  @AuthRoles(UserRoleEnum.ADMIN)
+  @Patch(':id')
+  editUser(@Param('id') id: string, @Body() dto: Partial<UpdateUserDto>) {
+    return this.usersService.updateUser(id, dto);
   }
 }

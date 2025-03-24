@@ -13,11 +13,18 @@ export class UsersRepository {
     return this.userRepository.findOne({ where: { username } });
   }
 
+  findOneById(id: string): Promise<User | null> {
+    return this.userRepository.findOne({ where: { id } });
+  }
+
   findAll(): Promise<User[]> {
     return this.userRepository.find();
   }
 
   create(user: Partial<User>): Promise<User> {
     return this.userRepository.save(this.userRepository.create(user));
+  }
+  update(user: User): Promise<User> {
+    return this.userRepository.save(user);
   }
 }

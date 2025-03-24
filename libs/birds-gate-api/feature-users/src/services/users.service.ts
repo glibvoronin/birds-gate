@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { User, UsersRepository } from '@birds-gate/data-access';
 import {
   CreateUserDto,
+  UpdateUserDto,
   UserResponseDto,
   UserRoleEnum,
 } from '@birds-gate/util-interfaces';
@@ -31,5 +32,20 @@ export class UsersService {
     const user = await UserMapper.fromCreateDto(dto);
     const createdUser = await this.userRepository.create(user);
     return UserMapper.toResponseDto(createdUser);
+  }
+
+  async updateUser(
+    id: string,
+    dto: Partial<UpdateUserDto>
+  ): Promise<UserResponseDto> {
+    const user = await this.userRepository.findOneById(id);
+    if (!user) {
+      throw new NotFoundException(`User ${id} not found`);
+    }
+
+    const updated = await UserMapper.applyUpdateDto(user, dto);
+    const saved = await this.userRepository.update(updated);
+
+    return UserMapper.toResponseDto(saved);
   }
 }

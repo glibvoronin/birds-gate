@@ -1,5 +1,9 @@
 import { User } from '@birds-gate/data-access';
-import { CreateUserDto, UserResponseDto } from '@birds-gate/util-interfaces';
+import {
+  CreateUserDto,
+  UpdateUserDto,
+  UserResponseDto,
+} from '@birds-gate/util-interfaces';
 import * as bcrypt from 'bcrypt';
 
 export class UserMapper {
@@ -32,5 +36,18 @@ export class UserMapper {
       ...dto,
       password: hashedPassword,
     });
+  }
+
+  static async applyUpdateDto(
+    user: User,
+    dto: Partial<UpdateUserDto>
+  ): Promise<User> {
+    if (dto.role) {
+      user.role = dto.role;
+    }
+    if (dto.password) {
+      user.password = await bcrypt.hash(dto.password, 10);
+    }
+    return user;
   }
 }
