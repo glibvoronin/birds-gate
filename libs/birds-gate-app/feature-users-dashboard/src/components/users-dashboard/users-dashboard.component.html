@@ -1,2 +1,2 @@
-<div>search</div>
-<lib-users-dashboard-table></lib-users-dashboard-table>
+<input type="text" placeholder="Search" class="mb-4" pInputText [fluid]="true" [(ngModel)]="searchTerm" />
+<lib-users-dashboard-table [users]="users() | search: searchTerm" [currentUserId]="userId()" [isAdmin]="isAdmin()" (editUser)="handleEditUser($event)"></lib-users-dashboard-table>

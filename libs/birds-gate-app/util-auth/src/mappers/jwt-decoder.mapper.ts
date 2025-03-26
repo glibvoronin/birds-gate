@@ -8,6 +8,7 @@ export class JwtDecoderMapper {
     try {
       const decoded = jwtDecode<JwtPayloadDto>(token);
       return {
+        id: decoded.sub,
         role: decoded.role as UserRoleEnum,
         username: decoded.username,
       };

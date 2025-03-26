@@ -1,6 +1,12 @@
 import { Route } from '@angular/router';
 import { authGuard, publicGuard } from '@birds-gate/feature-fe-auth';
 import { LOGIN_PATH } from '@birds-gate/util-constants';
+import { provideState, provideStore } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
+import {
+  UsersDashboardEffects,
+  usersDashboardFeature,
+} from '@birds-gate/bg-app-data-access-users-dashboard';
 
 export const appRoutes: Route[] = [
   {
@@ -24,6 +30,13 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'users',
+        providers: [
+          provideState(
+            usersDashboardFeature.name,
+            usersDashboardFeature.reducer
+          ),
+          provideEffects(UsersDashboardEffects),
+        ],
         loadComponent: () =>
           import('@birds-gate/bg-app-feature-users-dashboard').then(
             (m) => m.UsersDashboardComponent

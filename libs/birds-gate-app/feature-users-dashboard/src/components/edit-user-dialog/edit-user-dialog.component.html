@@ -1,0 +1,55 @@
+<div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+    <div>
+      <label class="block text-sm mb-1" for="username">Username</label>
+      <input
+        pInputText
+        id="username"
+        formControlName="username"
+        class="w-full"
+      />
+    </div>
+
+    <div>
+      <label class="block text-sm mb-1" for="role">Role</label>
+      <p-select
+        inputId="role"
+        appendTo="body"
+        formControlName="role"
+        [options]="roleOptions"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Select a role"
+        class="w-full"
+      />
+    </div>
+
+    <div>
+      <label class="block text-sm mb-1" for="password">Password</label>
+      <p-password
+        id="password"
+        formControlName="password"
+        [feedback]="false"
+        [fluid]="true"
+        [toggleMask]="true"
+        class="w-full"
+      ></p-password>
+    </div>
+
+    <div class="flex justify-end gap-2 pt-4">
+      <button
+        pButton
+        type="button"
+        label="Cancel"
+        class="p-button-secondary"
+        (click)="ref.close()"
+      ></button>
+      <button
+        pButton
+        type="submit"
+        label="Save"
+        [disabled]="form.invalid"
+      ></button>
+    </div>
+  </form>
+</div>

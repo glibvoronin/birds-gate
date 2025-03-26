@@ -16,6 +16,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { authInterceptor } from '@birds-gate/feature-fe-auth';
 import { unauthorizedInterceptor } from '@birds-gate/feature-fe-auth';
+import { DialogService } from 'primeng/dynamicdialog';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,6 +26,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(
       withInterceptors([authInterceptor, unauthorizedInterceptor])
     ),
+    DialogService,
     providePrimeNG({
       theme: {
         preset: Aura,

@@ -14,4 +14,12 @@ export class UsersDashboardService {
   fetchUsers() {
     return this.http.get<UserResponseDto[]>(`${this.usersUrl}`);
   }
+
+  editUser(user: UserResponseDto) {
+    const { id, ...updatedUser } = user;
+    return this.http.patch<UserResponseDto>(
+      `${this.usersUrl}/${id}`,
+      updatedUser
+    );
+  }
 }

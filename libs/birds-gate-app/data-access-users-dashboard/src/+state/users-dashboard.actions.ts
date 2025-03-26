@@ -10,3 +10,16 @@ export const loadUsersError = createAction(
   '[Users dashboard] Load users error',
   props<{ error?: string }>()
 );
+
+export const editUser = createAction(
+  '[Users dashboard] edit user',
+  props<{ user: UserResponseDto; closeDialogCb: () => void }>()
+);
+export const editUserSuccess = createAction(
+  '[Users dashboard] edit user success',
+  props<{ user: UserResponseDto }>()
+);
+export const editUserError = createAction(
+  '[Users dashboard] edit user error',
+  props<{ error?: string }>()
+);

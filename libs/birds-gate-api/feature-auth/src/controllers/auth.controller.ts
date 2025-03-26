@@ -1,9 +1,11 @@
 import { Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthService } from '../services/auth.service';
-import { AuthenticatedRequest } from '@birds-gate/util-interfaces';
 import { LocalAuthGuard } from '../guards/local-auth.guard';
 import { SkipAuth } from '../decorators/skip-auth.decorator';
-import { AuthenticatedJwtRequest } from '@birds-gate/util-interfaces';
+import {
+  AuthenticatedJwtRequest,
+  AuthenticatedRequest,
+} from '@birds-gate/feature-users';
 
 @Controller('auth')
 export class AuthController {

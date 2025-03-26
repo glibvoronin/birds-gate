@@ -30,3 +30,8 @@ export const selectIsAdmin = createSelector(
   selectAuthState,
   (state) => state.user?.role === UserRoleEnum.ADMIN
 );
+
+export const selectUserId = createSelector(
+  selectAuthState,
+  (state) => state.user?.id ?? null
+);
