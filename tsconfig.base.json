@@ -16,6 +16,9 @@
     "baseUrl": ".",
     "useDefineForClassFields": false,
     "paths": {
+      "@birds-gate/bg-app-feature-layout": [
+        "libs/birds-gate-app/feature-layout/src/index.ts"
+      ],
       "@birds-gate/bg-app-feature-users-dashboard": [
         "libs/birds-gate-app/feature-users-dashboard/src/index.ts"
       ],

@@ -1,0 +1,18 @@
+<lib-layout>
+
+  <div ngProjectAs="[profile]">
+    <div class="relative inline-block">
+      <p-avatar
+        (click)="menu.toggle($event)"
+        [label]="avatarLabel"
+        shape="circle"
+        styleClass="bg-primary-500 text-white cursor-pointer"
+      ></p-avatar>
+
+      <p-menu styleClass="mt-2" #menu [popup]="true" [model]="items" appendTo="body"></p-menu>
+    </div>
+  </div>
+
+  <router-outlet></router-outlet>
+
+</lib-layout>

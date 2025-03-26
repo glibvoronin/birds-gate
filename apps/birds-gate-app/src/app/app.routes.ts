@@ -10,17 +10,26 @@ export const appRoutes: Route[] = [
       import('@birds-gate/feature-fe-auth').then((m) => m.LoginPageComponent),
   },
   {
-    path: 'users',
+    path: '',
     canActivate: [authGuard],
     loadComponent: () =>
-      import('@birds-gate/bg-app-feature-users-dashboard').then(
-        (m) => m.BgAppFeatureUsersDashboardComponent
+      import('@birds-gate/bg-app-feature-layout').then(
+        (m) => m.DashboardLayoutComponent
       ),
-  },
-  {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: 'users',
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'users',
+      },
+      {
+        path: 'users',
+        loadComponent: () =>
+          import('@birds-gate/bg-app-feature-users-dashboard').then(
+            (m) => m.BgAppFeatureUsersDashboardComponent
+          ),
+      },
+    ],
   },
   // TODO: Some nice "Not Found" page for catchAll route
   {
