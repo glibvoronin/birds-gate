@@ -35,3 +35,8 @@ export const selectUserId = createSelector(
   selectAuthState,
   (state) => state.user?.id ?? null
 );
+
+export const selectUserName = createSelector(
+  selectAuthState,
+  (state) => state.user?.username
+);
