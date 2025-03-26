@@ -4,6 +4,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, concatMap, map, switchMap } from 'rxjs/operators';
 import { Observable, EMPTY, of } from 'rxjs';
 import {
+  createUser,
+  createUserError,
+  createUserSuccess,
   editUser,
   editUserSuccess,
   loadUsers,
@@ -43,6 +46,25 @@ export class UsersDashboardEffects {
           }),
           catchError(() => {
             return of(loadUsersError({}));
+          })
+        )
+      )
+    );
+  });
+
+  createUserEffect$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(createUser),
+      switchMap(({ user, closeDialogCb }) =>
+        this.usersDashboardService.createUser(user).pipe(
+          map((userResponse) => {
+            closeDialogCb();
+            return createUserSuccess({
+              user: userResponse,
+            });
+          }),
+          catchError(() => {
+            return of(createUserError({}));
           })
         )
       )

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BE_URL } from '@birds-gate/util-constants';
 import { HttpClient } from '@angular/common/http';
-import { LoginResponseDto, UserResponseDto } from '@birds-gate/util-dto';
+import { CreateUserDto, UserResponseDto } from '@birds-gate/util-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -21,5 +21,9 @@ export class UsersDashboardService {
       `${this.usersUrl}/${id}`,
       updatedUser
     );
+  }
+
+  createUser(user: CreateUserDto) {
+    return this.http.post<UserResponseDto>(`${this.usersUrl}`, user);
   }
 }

@@ -1,5 +1,8 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import {
+  createUser,
+  createUserError,
+  createUserSuccess,
   editUser,
   editUserError,
   editUserSuccess,
@@ -32,12 +35,20 @@ export const reducer = createReducer(
     adapter.setAll(users, { ...state, fetchingUsers: false })
   ),
   on(loadUsersError, (state) => ({ ...state, fetchingUsers: false })),
-  on(editUser, (state) => ({ ...state, fetchingEditUser: false })),
+  on(editUser, (state) => ({ ...state, fetchingEditUser: true })),
   on(editUserSuccess, (state, { user }) => {
     const { id, ...changes } = user;
-    return adapter.updateOne({ id, changes }, { ...state });
+    return adapter.updateOne(
+      { id, changes },
+      { ...state, fetchingEditUser: false }
+    );
   }),
-  on(editUserError, (state) => ({ ...state, fetchingEditUser: false }))
+  on(editUserError, (state) => ({ ...state, fetchingEditUser: false })),
+  on(createUser, (state) => ({ ...state, fetchingEditUser: true })),
+  on(createUserSuccess, (state, { user }) => {
+    return adapter.addOne(user, { ...state, fetchingEditUser: false });
+  }),
+  on(createUserError, (state) => ({ ...state, fetchingEditUser: false }))
 );
 
 export const usersDashboardFeature = createFeature({

@@ -30,7 +30,6 @@
         <td><button
           pButton
           icon="pi pi-pencil"
-          class="p-button-rounded p-button-text"
           (click)="editUser.emit({ userId: user.id })"
           aria-label="Edit user"
           [disabled]="user.id === currentUserId()"

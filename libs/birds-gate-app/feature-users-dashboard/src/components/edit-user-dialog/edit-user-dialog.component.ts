@@ -18,6 +18,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { Store } from '@ngrx/store';
 import {
+  createUser,
   editUser,
   selectUserById,
 } from '@birds-gate/bg-app-data-access-users-dashboard';
@@ -44,12 +45,12 @@ export class EditUserDialogComponent {
   private readonly config = inject(DynamicDialogConfig);
 
   readonly user = this.store.selectSignal(
-    selectUserById(this.config.data.userId)
+    selectUserById(this.config.data?.userId)
   );
 
   readonly form = new FormGroup({
     username: new FormControl(
-      { value: '', disabled: true },
+      { value: '', disabled: !!this.user() },
       {
         nonNullable: true,
         validators: [Validators.required],
@@ -61,6 +62,7 @@ export class EditUserDialogComponent {
     }),
     password: new FormControl<string>('', {
       nonNullable: true,
+      validators: this.user() ? [] : [Validators.required],
     }),
   });
 
@@ -84,6 +86,14 @@ export class EditUserDialogComponent {
   onSubmit(): void {
     if (this.form.invalid) return;
 
+    if (this.user()) {
+      this.editUser();
+    } else {
+      this.createUser();
+    }
+  }
+
+  private editUser() {
     const user: UserResponseDto = {
       ...(this.user() as UserResponseDto),
       ...this.form.value,
@@ -94,6 +104,22 @@ export class EditUserDialogComponent {
         user,
         closeDialogCb: () => {
           this.ref.close(user);
+        },
+      })
+    );
+  }
+
+  private createUser() {
+    const { username, role, password } = this.form.getRawValue();
+    this.store.dispatch(
+      createUser({
+        user: {
+          username,
+          password,
+          role,
+        },
+        closeDialogCb: () => {
+          this.ref.close();
         },
       })
     );

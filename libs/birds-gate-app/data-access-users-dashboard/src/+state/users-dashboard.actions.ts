@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { UserResponseDto } from '@birds-gate/util-dto';
+import { CreateUserDto, UserResponseDto } from '@birds-gate/util-dto';
 
 export const loadUsers = createAction('[Users dashboard] Load users');
 export const loadUsersSuccess = createAction(
@@ -21,5 +21,18 @@ export const editUserSuccess = createAction(
 );
 export const editUserError = createAction(
   '[Users dashboard] edit user error',
+  props<{ error?: string }>()
+);
+
+export const createUser = createAction(
+  '[Users dashboard] create user',
+  props<{ user: CreateUserDto; closeDialogCb: () => void }>()
+);
+export const createUserSuccess = createAction(
+  '[Users dashboard] create user success',
+  props<{ user: UserResponseDto }>()
+);
+export const createUserError = createAction(
+  '[Users dashboard] create user error',
   props<{ error?: string }>()
 );

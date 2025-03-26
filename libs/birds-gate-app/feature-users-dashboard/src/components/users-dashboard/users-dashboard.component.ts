@@ -17,6 +17,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { EditUserDialogComponent } from '../edit-user-dialog/edit-user-dialog.component';
 import { SearchPipe } from '@birds-gate/bg-app-util-common';
+import { ButtonDirective } from 'primeng/button';
 
 @Component({
   selector: 'lib-users-dashboard',
@@ -27,6 +28,7 @@ import { SearchPipe } from '@birds-gate/bg-app-util-common';
     InputTextModule,
     DynamicDialogModule,
     SearchPipe,
+    ButtonDirective,
   ],
   templateUrl: './users-dashboard.component.html',
   styleUrl: './users-dashboard.component.css',
@@ -50,6 +52,13 @@ export class UsersDashboardComponent implements OnInit {
     this.dialogService.open(EditUserDialogComponent, {
       data: { userId },
       header: 'Edit User',
+      width: '500px',
+    });
+  }
+
+  handleCreateUser() {
+    this.dialogService.open(EditUserDialogComponent, {
+      header: 'Create User',
       width: '500px',
     });
   }
