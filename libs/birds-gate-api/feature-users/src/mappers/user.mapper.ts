@@ -1,10 +1,11 @@
 import { User } from '@birds-gate/data-access';
+import * as bcrypt from 'bcrypt';
 import {
   CreateUserDto,
   UpdateUserDto,
   UserResponseDto,
-} from '@birds-gate/util-interfaces';
-import * as bcrypt from 'bcrypt';
+} from '@birds-gate/util-dto';
+import { UserRoleEnum } from '@birds-gate/util-interfaces';
 
 export class UserMapper {
   static toResponseDto(user: User): UserResponseDto {
@@ -34,6 +35,7 @@ export class UserMapper {
 
     return new User({
       ...dto,
+      role: dto.role as UserRoleEnum,
       password: hashedPassword,
     });
   }
@@ -43,7 +45,7 @@ export class UserMapper {
     dto: Partial<UpdateUserDto>
   ): Promise<User> {
     if (dto.role) {
-      user.role = dto.role;
+      user.role = dto.role as UserRoleEnum;
     }
     if (dto.password) {
       user.password = await bcrypt.hash(dto.password, 10);

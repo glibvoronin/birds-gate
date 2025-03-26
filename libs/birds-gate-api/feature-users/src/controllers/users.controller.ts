@@ -1,12 +1,11 @@
 import { Body, Controller, Get, Param, Patch, Post, Req } from '@nestjs/common';
 import {
   AuthenticatedJwtRequest,
-  UpdateUserDto,
   UserRoleEnum,
 } from '@birds-gate/util-interfaces';
 import { UsersService } from '../services/users.service';
-import { CreateUserDto } from '@birds-gate/util-interfaces';
 import { AuthRoles } from '@birds-gate/util-roles';
+import { CreateUserDto, UpdateUserDto } from '@birds-gate/util-dto';
 
 @Controller('users')
 export class UsersController {

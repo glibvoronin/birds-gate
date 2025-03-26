@@ -1,0 +1,18 @@
+<div class="flex justify-center items-center h-screen bg-gray-100">
+  <p-card class="w-full max-w-md shadow-lg">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="mb-4">
+        <input formControlName="username" pInputText placeholder="Username" class="w-full" />
+      </div>
+      <div class="mb-4">
+        <p-password formControlName="password" [fluid]="true" [feedback]="false" placeholder="Password" [toggleMask]="true" />
+        @if (loginErrorMessage(); as errorMessage) {
+          <div class="pt-2">
+            <p-message severity="error" variant="outlined">{{ errorMessage }}</p-message>
+          </div>
+        }
+      </div>
+      <button pButton type="submit" label="Login" [disabled]="form.invalid || loginFetching()" class="w-full"></button>
+    </form>
+  </p-card>
+</div>

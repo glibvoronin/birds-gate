@@ -14,16 +14,39 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
+    "useDefineForClassFields": false,
     "paths": {
+      "@birds-gate/bg-app-feature-users-dashboard": [
+        "libs/birds-gate-app/feature-users-dashboard/src/index.ts"
+      ],
+      "@birds-gate/bg-app-util-auth": [
+        "libs/birds-gate-app/util-auth/src/index.ts"
+      ],
+      "@birds-gate/bg-app-util-common": [
+        "libs/birds-gate-app/util-common/src/index.ts"
+      ],
       "@birds-gate/data-access": [
         "libs/birds-gate-api/data-access/src/index.ts"
+      ],
+      "@birds-gate/data-access-fe-auth": [
+        "libs/birds-gate-app/data-access-auth/src/index.ts"
       ],
       "@birds-gate/feature-auth": [
         "libs/birds-gate-api/feature-auth/src/index.ts"
       ],
+      "@birds-gate/feature-fe-auth": [
+        "libs/birds-gate-app/feature-auth/src/index.ts"
+      ],
       "@birds-gate/feature-users": [
         "libs/birds-gate-api/feature-users/src/index.ts"
       ],
+      "@birds-gate/ui-design-system": [
+        "libs/birds-gate-app/ui-design-system/src/index.ts"
+      ],
+      "@birds-gate/util-constants": [
+        "libs/birds-gate-app/util-constants/src/index.ts"
+      ],
+      "@birds-gate/util-dto": ["libs/shared/util-dto/src/index.ts"],
       "@birds-gate/util-interfaces": [
         "libs/shared/util-interfaces/src/index.ts"
       ],

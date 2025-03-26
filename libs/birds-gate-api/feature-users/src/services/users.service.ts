@@ -1,12 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { User, UsersRepository } from '@birds-gate/data-access';
+import { UserRoleEnum } from '@birds-gate/util-interfaces';
+import { UserMapper } from '../mappers/user.mapper';
 import {
   CreateUserDto,
   UpdateUserDto,
   UserResponseDto,
-  UserRoleEnum,
-} from '@birds-gate/util-interfaces';
-import { UserMapper } from '../mappers/user.mapper';
+} from '@birds-gate/util-dto';
 
 @Injectable()
 export class UsersService {

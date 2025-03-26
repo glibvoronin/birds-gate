@@ -53,7 +53,6 @@
         "targetName": "e2e"
       }
     },
-
     {
       "plugin": "@nx/webpack/plugin",
       "options": {
@@ -71,6 +70,13 @@
       "linter": "eslint",
       "style": "css",
       "unitTestRunner": "jest"
+    },
+    "@nx/angular:library": {
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nx/angular:component": {
+      "style": "css"
     }
   }
 }
