@@ -26,7 +26,7 @@ export const appRoutes: Route[] = [
         path: 'users',
         loadComponent: () =>
           import('@birds-gate/bg-app-feature-users-dashboard').then(
-            (m) => m.BgAppFeatureUsersDashboardComponent
+            (m) => m.UsersDashboardComponent
           ),
       },
     ],

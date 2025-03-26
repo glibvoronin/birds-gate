@@ -19,6 +19,4 @@ export class AuthService {
 
     return this.http.post<LoginResponseDto>(`${this.authUrl}/login`, body);
   }
-
-  private decodeJwtToken() {}
 }
