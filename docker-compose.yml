@@ -11,3 +11,26 @@ services:
     ports:
       - "5432:5432"
     restart: unless-stopped
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    env_file:
+      - ./.env
+    container_name: birds-gate-api
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+    container_name: birds-gate-app
+    ports:
+      - "4200:80"
+    depends_on:
+      - api
+    restart: unless-stopped

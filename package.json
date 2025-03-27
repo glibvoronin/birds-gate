@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "nx run-many --target=serve --projects=birds-gate-app,birds-gate-api --parallel",
+    "build": "nx run-many --target=build --projects=birds-gate-app,birds-gate-api --parallel",
     "start:fe": "nx serve birds-gate-app",
     "start:be": "nx serve birds-gate-api"
   },

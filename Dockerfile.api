@@ -1,0 +1,8 @@
+FROM node:22
+
+WORKDIR /app
+
+COPY dist/apps/birds-gate-api ./
+RUN npm ci
+
+CMD ["node", "main.js"]
