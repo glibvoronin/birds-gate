@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenubarModule } from 'primeng/menubar';
 import { CardModule } from 'primeng/card';
@@ -8,5 +8,6 @@ import { CardModule } from 'primeng/card';
   imports: [CommonModule, MenubarModule, CardModule],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutComponent {}

@@ -1,4 +1,9 @@
-import { Component, computed, inject } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LayoutComponent } from '@birds-gate/ui-design-system';
 import { RouterOutlet } from '@angular/router';
@@ -21,6 +26,7 @@ import { logout, selectUserName } from '@birds-gate/data-access-fe-auth';
   ],
   templateUrl: './dashboard-layout.component.html',
   styleUrl: './dashboard-layout.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardLayoutComponent {
   private readonly store = inject(Store);

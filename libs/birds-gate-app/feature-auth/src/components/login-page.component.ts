@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -11,11 +11,11 @@ import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { PasswordModule } from 'primeng/password';
 import { Store } from '@ngrx/store';
-import { login } from '../../../data-access-auth/src/+state/auth.actions';
+import { login } from '@birds-gate/data-access-fe-auth';
 import {
   selectLoginErrorMessage,
   selectLoginFetching,
-} from '../../../data-access-auth/src/+state/auth.selectors';
+} from '@birds-gate/data-access-fe-auth';
 import { MessageModule } from 'primeng/message';
 
 @Component({
@@ -31,6 +31,7 @@ import { MessageModule } from 'primeng/message';
   ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginPageComponent {
   readonly form = new FormGroup({
