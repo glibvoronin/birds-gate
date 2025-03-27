@@ -98,5 +98,8 @@
     "tailwindcss-primeui": "^0.5.1",
     "typeorm": "^0.3.21",
     "zone.js": "~0.15.0"
+  },
+  "engines": {
+    "node": ">=22.0.0"
   }
 }
