@@ -6,7 +6,8 @@
     "start": "nx run-many --target=serve --projects=birds-gate-app,birds-gate-api --parallel",
     "build": "nx run-many --target=build --projects=birds-gate-app,birds-gate-api --parallel",
     "start:fe": "nx serve birds-gate-app",
-    "start:be": "nx serve birds-gate-api"
+    "start:be": "nx serve birds-gate-api",
+    "test": "nx run-many --target=test --all  --parallel --skip-nx-cache --output-style=stream --no-inline"
   },
   "private": true,
   "devDependencies": {
@@ -51,6 +52,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "jest-environment-node": "^29.7.0",
     "jest-preset-angular": "~14.4.0",
+    "ng-mocks": "^14.13.4",
     "nx": "20.6.2",
     "prettier": "^2.6.2",
     "ts-jest": "^29.1.0",
