@@ -1,13 +1,11 @@
 import { CanActivateFn, Router } from '@angular/router';
 import { inject } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { selectIsAuthenticated } from '@birds-gate/data-access-fe-auth';
+import { TokenHelper } from '@birds-gate/bg-app-util-auth';
 
 export const publicGuard: CanActivateFn = (route, state) => {
-  const store = inject(Store);
   const router = inject(Router);
 
-  const isAuthenticated = store.selectSignal(selectIsAuthenticated)();
+  const isAuthenticated = !!TokenHelper.getAuthToken();
 
   if (isAuthenticated) {
     router.navigate(['/']);

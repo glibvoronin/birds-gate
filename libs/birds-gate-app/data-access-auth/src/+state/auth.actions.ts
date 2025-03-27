@@ -12,7 +12,9 @@ export const login = createAction(
 );
 export const loginSuccess = createAction(
   '[Login Page] Login success',
-  props<{ accessToken: string; user: AuthenticatedUser }>()
+  props<{
+    user: AuthenticatedUser;
+  }>()
 );
 export const loginError = createAction(
   '[Login Page] Login error',
@@ -20,3 +22,6 @@ export const loginError = createAction(
 );
 
 export const logout = createAction('[Auth] Logout');
+
+export const logoutSuccess = createAction('[Auth] Logout success');
+export const logoutError = createAction('[Auth] Logout error');

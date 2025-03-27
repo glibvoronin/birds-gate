@@ -9,14 +9,15 @@ import { UserRoleEnum } from '@birds-gate/util-interfaces';
 
 export class UserMapper {
   static toResponseDto(user: User): UserResponseDto {
-    const { password, ...safeUser } = user;
+    const { password, refreshTokenHash, ...safeUser } = user;
     return {
       ...safeUser,
     };
   }
 
   static toShortResponseDto(user: User): UserResponseDto {
-    const { password, createdAt, updatedAt, ...safeUser } = user;
+    const { password, refreshTokenHash, createdAt, updatedAt, ...safeUser } =
+      user;
     return {
       ...safeUser,
     };

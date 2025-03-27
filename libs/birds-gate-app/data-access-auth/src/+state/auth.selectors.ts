@@ -16,16 +16,6 @@ export const selectLoginErrorMessage = createSelector(
   (state) => state?.loginErrorMessage
 );
 
-export const selectAccessToken = createSelector(
-  selectAuthState,
-  (state) => state.accessToken
-);
-
-export const selectIsAuthenticated = createSelector(
-  selectAuthState,
-  (state) => !!state.accessToken
-);
-
 export const selectIsAdmin = createSelector(
   selectAuthState,
   (state) => state.user?.role === UserRoleEnum.ADMIN

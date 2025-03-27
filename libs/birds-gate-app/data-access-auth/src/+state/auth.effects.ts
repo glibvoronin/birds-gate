@@ -1,9 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
-import { catchError, concatMap, map, tap } from 'rxjs/operators';
+import { catchError, concatMap, map, switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { login, loginError, loginSuccess, logout } from './auth.actions';
+import {
+  login,
+  loginError,
+  loginSuccess,
+  logout,
+  logoutError,
+  logoutSuccess,
+} from './auth.actions';
 import { AuthService } from '../services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -19,10 +26,8 @@ export class AuthEffects {
       concatMap(({ username, password }) =>
         this.authService.login(username, password).pipe(
           map(({ access_token }) => {
-            TokenHelper.setAuthToken(access_token);
             this.router.navigate(['/']);
             return loginSuccess({
-              accessToken: access_token,
               user: JwtDecoderMapper.authUserFromJwtToken(
                 access_token
               ) as AuthenticatedUser,
@@ -40,18 +45,22 @@ export class AuthEffects {
     );
   });
 
-  logoutEffect$ = createEffect(
-    () => {
-      return this.actions$.pipe(
-        ofType(logout),
-        tap(() => {
-          TokenHelper.removeAuthToken();
-          this.router.navigate(['/', LOGIN_PATH]);
-        })
-      );
-    },
-    { dispatch: false }
-  );
+  logoutEffect$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(logout),
+      switchMap(() =>
+        this.authService.logout().pipe(
+          map(() => logoutSuccess()),
+          catchError(() => of(logoutError))
+        )
+      ),
+      tap(() => {
+        TokenHelper.removeRefreshToken();
+        TokenHelper.removeAuthToken();
+        this.router.navigate(['/', LOGIN_PATH]);
+      })
+    );
+  });
 
   constructor(
     private readonly actions$: Actions,

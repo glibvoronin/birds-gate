@@ -74,11 +74,13 @@ export class AuthService {
       username: user.username,
       sub: user.id,
       role: user.role,
-      jti: randomUUID(),
     };
     const [accessToken, refreshToken] = await Promise.all([
-      this.jwtService.signAsync(payload),
-      this.jwtService.signAsync(payload, this.refreshTokenConf),
+      this.jwtService.signAsync({ ...payload, jti: randomUUID() }),
+      this.jwtService.signAsync(
+        { ...payload, jti: randomUUID() },
+        this.refreshTokenConf
+      ),
     ]);
     return {
       accessToken,
