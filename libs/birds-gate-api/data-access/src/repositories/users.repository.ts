@@ -24,7 +24,19 @@ export class UsersRepository {
   create(user: Partial<User>): Promise<User> {
     return this.userRepository.save(this.userRepository.create(user));
   }
+
   update(user: User): Promise<User> {
     return this.userRepository.save(user);
+  }
+
+  updateRefreshTokenHash(userId: string, refreshTokenHash: string) {
+    return this.userRepository.update({ id: userId }, { refreshTokenHash });
+  }
+
+  removeRefreshTokenHash(userId: string) {
+    return this.userRepository.update(
+      { id: userId },
+      { refreshTokenHash: null }
+    );
   }
 }

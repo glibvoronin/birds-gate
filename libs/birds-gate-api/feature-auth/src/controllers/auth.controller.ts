@@ -6,6 +6,7 @@ import {
   AuthenticatedJwtRequest,
   AuthenticatedRequest,
 } from '@birds-gate/feature-users';
+import { JwtRefreshAuthGuard } from '../guards/jwt-refresh-auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -18,8 +19,16 @@ export class AuthController {
     return this.authService.login(req.user);
   }
 
-  @Get('profile')
-  getProfile(@Req() req: AuthenticatedJwtRequest) {
-    return req.user;
+  @SkipAuth()
+  @UseGuards(JwtRefreshAuthGuard)
+  @Post('refresh')
+  async refreshToken(@Req() req: AuthenticatedJwtRequest) {
+    return this.authService.refreshToken(req.user.userId);
+  }
+
+  @Post('logout')
+  async signOut(@Req() req: AuthenticatedJwtRequest) {
+    await this.authService.logout(req.user.userId);
+    return {};
   }
 }

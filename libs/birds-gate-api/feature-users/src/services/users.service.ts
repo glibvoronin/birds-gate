@@ -20,6 +20,14 @@ export class UsersService {
     return user;
   }
 
+  async findUserById(id: string): Promise<User | null> {
+    const user = await this.userRepository.findOneById(id);
+    if (!user) {
+      return null;
+    }
+    return user;
+  }
+
   async getAllUsers(authRole: UserRoleEnum): Promise<UserResponseDto[]> {
     const users = await this.userRepository.findAll();
     if (authRole === UserRoleEnum.ADMIN) {
@@ -47,5 +55,16 @@ export class UsersService {
     const saved = await this.userRepository.update(updated);
 
     return UserMapper.toResponseDto(saved);
+  }
+
+  async updateRefreshTokenHash(userId: string, refreshTokenHash: string) {
+    return await this.userRepository.updateRefreshTokenHash(
+      userId,
+      refreshTokenHash
+    );
+  }
+
+  async logout(userId: string) {
+    return await this.userRepository.removeRefreshTokenHash(userId);
   }
 }

@@ -19,6 +19,13 @@ export class User {
   password: string;
 
   @Column({
+    name: 'refresh_token_hash',
+    default: null,
+    nullable: true,
+  })
+  refreshTokenHash: string | null;
+
+  @Column({
     type: 'enum',
     enum: UserRoleEnum,
     default: UserRoleEnum.USER,
